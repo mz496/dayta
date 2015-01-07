@@ -1,0 +1,105 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!--link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" /-->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <!--link rel="stylesheet" href="styles/main.css"-->
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="frameworks/bootstrap.min.css" />
+  </head>
+
+  <style>
+    td {
+      width: 20px;
+      height: 20px;
+      border: 1px solid black;
+      text-align: center;
+    }
+    div {
+      border: 1px solid blue;
+      margin: 10px;
+    }
+
+  </style>
+
+  <body ng-app="daytaApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div ng-controller="CalendarSetController">
+      <p>(Database values)
+      <p>First date: {{calData[0].month}}/{{calData[0].day}}/{{calData[0].year}}</p>
+      <p>Second date: {{calData[1].month}}/{{calData[1].day}}/{{calData[1].year}}</p>
+      <p>Selected calculators: {{selectedCalculators[0]}}, {{selectedCalculators[1]}}</p>
+      <p>Selected 2-calendar calculator: {{selectedCalculatorTwoCal}}</p>
+      <p>Active: {{active[0]}} {{active[1]}}</p>
+      <br/>
+
+      <calculator-two-cal-selector-element ng-show="selectedCalculatorTwoCal === null"></calculator-two-cal-selector-element>
+
+      <result-pane-two-cal ng-show="selectedCalculatorTwoCal !== null"></result-pane-two-cal>
+
+      <table>
+        <tr ng-repeat="i in calData track by $index">
+          <td>
+            <date-selector-element></date-selector-element>
+            <calculator-selector-element></calculator-selector-element>
+          </td>
+          <td>
+            <result-pane></result-pane>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!--script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script-->
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!--script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script-->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <script src="frameworks/bootstrap.min.js"></script>
+    <script src="frameworks/jquery-2.1.3.min.js"></script>
+    <script src="frameworks/angular.min.js"></script>
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/date-selector.js"></script>
+        <script src="scripts/calculator-selector.js"></script>
+        <script src="scripts/calculator-two-cal-selector.js"></script>
+        <script src="scripts/result-pane.js"></script>
+        <script src="scripts/result-pane-two-cal.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

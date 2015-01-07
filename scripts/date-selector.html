@@ -1,0 +1,62 @@
+<div ng-show="!initialized" ng-click="add()">
+  <h1>[+ADD]</h1>
+</div>
+
+<div ng-show="initialized">
+  <p ng-show="!finished" ng-click="delete()">[Cancel]</p>
+
+  <table ng-show="decadesInView">
+    <tr>
+      <td ng-click="selectCentury(century - 100)">-</td>
+      <td></td>
+      <td ng-click="selectCentury(century + 100)">+</td>
+    <tr ng-repeat="decadesRow in decadesTable track by $index">
+      <td ng-repeat="(index, decade) in decadesRow track by $index" ng-click="selectDecade(decade)">
+      {{decade == 0 ? '' : decade.toString() + '-' + (decade + 9).toString()}}</td>
+    </tr>
+  </table>
+
+  <table ng-show="yearsInView">
+    <tr ng-click="yearsToDecades()">
+      <td>Go back</td>
+    </tr>
+    <tr ng-repeat="yearsRow in yearsTable track by $index">
+      <td ng-repeat="(index, year) in yearsRow track by $index" ng-click="selectYear(year)">
+      {{year == 0 ? '' : year}}</td>
+    </tr>
+  </table>
+
+  <table ng-show="monthsInView">
+    <tr ng-click="monthsToYears()">
+      <td>Go back</td>
+    </tr>
+    <tr ng-repeat="monthsRow in monthsTable track by $index">
+      <td ng-repeat="(index, month) in monthsRow track by $index" ng-click="selectMonth(month, year)">
+      {{monthData[month].nickname}}</td>
+    </tr>
+  </table>
+
+  <table ng-show="daysInView">
+    <tr ng-click="daysToMonths()">
+      <td>Go back</td>
+    </tr>
+    <tr>
+      <td>S</td>
+      <td>M</td>
+      <td>T</td>
+      <td>W</td>
+      <td>R</td>
+      <td>F</td>
+      <td>S</td>
+    </tr>
+    <tr ng-repeat="daysRow in daysTable track by $index">
+      <td ng-repeat="(index, day) in daysRow track by $index" ng-click="selectDay(day)">
+      {{day}}</td>
+    </tr>
+  </table>
+
+  <div ng-show="finished">
+    <p>Date chosen: {{monthData[month].name}} {{day}}, {{year}}</p>
+    <p ng-click="delete()">[Delete]</p>
+  </div>
+</div>
