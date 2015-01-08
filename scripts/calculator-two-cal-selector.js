@@ -14,7 +14,16 @@
   app.controller('CalculatorTwoCalController', function($scope, CalProperties) {
     $scope.active = CalProperties.active;
     $scope.selectedCalculatorTwoCal = CalProperties.selectedCalculatorTwoCal;
-    $scope.calculatorsTwoCal = ['1','2','3','4'];
+    $scope.calculatorsTwoCal = [
+      {
+        nickname: 'allDays',
+        value: 'All days between dates',
+      },
+      {
+        nickname: 'weekendsWeekdays',
+        value: 'Weekends/weekdays between dates',
+      },
+    ];
 
     $scope.showDropdown = CalProperties.active[0] && CalProperties.active[1];
 

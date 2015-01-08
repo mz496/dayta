@@ -1,4 +1,14 @@
 <div>
   <calculator-two-cal-selector-element></calculator-two-cal-selector-element>
   <p>Calculator: {{selectedCalculatorTwoCal}}</p>
+
+  <div ng-show="selectedCalculatorTwoCal === 'allDays'">
+    <p>Days between: {{daysBetween}} (not including end date)</p>
+    <p>That's {{daysBetweenLongForm[0]}} years, {{daysBetweenLongForm[1]}} months, {{daysBetweenLongForm[2]}} days.
+    <p>The total is {{hoursBetween}} hours, or {{minsBetween}} minutes, or {{secsBetween}} seconds.</p>
+  </div>
+
+  <div ng-show="selectedCalculatorTwoCal === 'weekendsWeekdays'">
+    <p>Weekends between: {{weekendsBetween}}, Weekdays between: {{daysBetween - weekendsBetween}}</p>
+  </div>
 </div>

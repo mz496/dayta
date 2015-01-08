@@ -101,6 +101,10 @@
       return arr;
     }
 
+    function isLeap(yr) {
+      return ((yr % 4 === 0 && yr % 100 !== 0) || yr % 400 === 0);
+    }
+
     $scope.decadesTable = generateTable(4,3);
     $scope.yearsTable = generateTable(4,3);
     $scope.monthsTable = generateTable(4,3);
@@ -110,7 +114,7 @@
 
     // called upon assignment of some century
     $scope.selectCentury = function(century) {
-      if (century !== '' && 1000 <= century && century <= 9900) {
+      if (century !== '' && 1900 <= century && century <= 9900) {
         $scope.century = century;
         $scope.decadesInView = true;
 
@@ -165,14 +169,13 @@
 
     // called upon assignment of some month for *already selected year*
     $scope.selectMonth = function(month, year) {
-      function isLeap(yr) {
-        return ((yr % 4 === 0 && yr % 100 !== 0) || yr % 400 === 0);
-      }
-
       if (month !== '') {
         $scope.month = month;
-        numDays = $scope.monthData[month].days;
         $scope.monthsToDays();
+        numDays = $scope.monthData[month].days;
+        if (isLeap(year) && month === 2) {
+          numDays++; // 29 days in Feb
+        }
 
         // fill day table for correct month+year
         // from http://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week#Basic_method_for_mental_calculation
@@ -184,25 +187,8 @@
           }
         }
 
-        var monthMagicNums = [0,3,3,6,1,4,6,2,5,0,3,5];
-        if (isLeap(year)) {
-          monthMagicNums[0] = 6;
-          monthMagicNums[1] = 2;
-          if (month === 2) {
-            numDays++; // 29 days in Feb
-          }
-        }
-
-        var d = 1;
-        // only need to place the first day, the rest follow in sequence
-        var m = monthMagicNums[month-1];
-        // read months table
-        var y = year % 100;
-        // last 2 digits of year
-        var c = 2 * (3 - ( ((year - year % 100) / 100) % 4 ));
-        // century number, 6 if first 2 digits of year 0 mod 4, 4 if 1 mod 4, 2 if 2 mod 4, 0 if 3 mod 4
-
-        var firstDayIndex = (d + m + y + Math.floor(y/4) + c) % 7;
+        var firstDay = new Date(year, month-1, 1);
+        var firstDayIndex = firstDay.getDay();
         // an index from 0=Sunday to 6=Saturday
 
         var day = 1;
