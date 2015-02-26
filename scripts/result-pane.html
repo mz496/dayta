@@ -1,3 +1,12 @@
 <div>
   <p>Calculator: {{selectedCalculator}}</p>
+
+  <div ng-show="selectedCalculator === 'yearPos'">
+    <p>This is day {{dayNumber}} out of 365-366 ({{dayNumber*100/365.25 | number:1}}%)</p>
+    <p>This is week {{weekNumber}} out of 52-53</p>
+  </div>
+
+  <div ng-show="selectedCalculator === 'countdown' || selectedCalculator === 'countup'">
+    <p>{{diffYear}} {{diffMonth}} {{diffDay}} {{diffHour}}:{{diffMin}}:{{diffSec}} since/until that date</p>
+  </div>
 </div>

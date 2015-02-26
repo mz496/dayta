@@ -17,7 +17,24 @@
     // these three are in sync with factory
     $scope.active = CalProperties.active;
     $scope.selectedCalculator = CalProperties.selectedCalculatorList[i];
-    $scope.calculators = ['1','2','3'];
+    $scope.calculators = [
+      {
+        nickname: 'yearPos',
+        value: 'Position within selected year'
+      },
+      {
+        nickname: 'addSubtract',
+        value: 'Add or subtract time'
+      },
+      {
+        nickname: 'countdown',
+        value: 'Countdown to date'
+      },
+      {
+        nickname: 'countup',
+        value: 'Countup from date'
+      },
+    ];
     $scope.showDropdown = CalProperties.active[i];
 
     // this is changed by the corresponding calendar
