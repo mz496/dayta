@@ -1,12 +1,25 @@
 <div>
-  <p>Calculator: {{selectedCalculator}}</p>
-
+  <calculator-selector-element></calculator-selector-element>
+  
   <div ng-show="selectedCalculator === 'yearPos'">
-    <p>This is day {{dayNumber}} out of 365-366 ({{dayNumber*100/365.25 | number:1}}%)</p>
-    <p>This is week {{weekNumber}} out of 52-53</p>
+    <h4>Results</h4>
+
+    <p>This date is number <b>{{dayNumber}}</b> out of {{dayCount}} ({{dayNumber*100/dayCount | number:1}}%).</p>
+    <p ng-show="weekNumber !== 53">This date is in week <b>{{weekNumber}}</b> of 52.</p>
+    <p ng-show="weekNumber === 53">This date is in week <b><abbr title="(a partial week that overflows into week 1 of the next year)">{{weekNumber}}</abbr></b> of 52.</p>
   </div>
 
   <div ng-show="selectedCalculator === 'countdown' || selectedCalculator === 'countup'">
-    <p>{{diffYear}} {{diffMonth}} {{diffDay}} {{diffHour}}:{{diffMin}}:{{diffSec}} since/until that date</p>
+    <h4>Results</h4>
+
+    <p>Between now and midnight on that date, there are</p>
+    <ul>
+      <li>{{diffYear}} {{diffYear === 1 ? "year" : "years"}}</li>
+      <li>{{diffMonth}} {{diffMonth === 1 ? "month" : "months"}}</li>
+      <li>{{diffDay}} {{diffDay === 1 ? "day" : "days"}}</li>
+      <li>{{diffHour}} {{diffHour === 1 ? "hour" : "hours"}}</li>
+      <li>{{diffMin}} {{diffMin === 1 ? "minute" : "minutes"}}</li>
+      <li>{{diffSec}} {{diffSec === 1 ? "second" : "seconds"}}</li>
+    </ul>
   </div>
 </div>

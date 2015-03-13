@@ -1,62 +1,87 @@
-<div ng-show="!initialized" ng-click="add()">
-  <h1>[+ADD]</h1>
-</div>
+<button class="btn btn-primary btn-lg" ng-show="!initialized" ng-click="add()">Add date</button>
 
 <div ng-show="initialized">
-  <p ng-show="!finished" ng-click="delete()">[Cancel]</p>
+  <button class="btn btn-danger" ng-show="!finished" ng-click="delete()">Cancel</button>
 
-  <table ng-show="decadesInView">
-    <tr>
-      <td ng-click="selectCentury(century - 100)">-</td>
-      <td></td>
-      <td ng-click="selectCentury(century + 100)">+</td>
-    <tr ng-repeat="decadesRow in decadesTable track by $index">
-      <td ng-repeat="(index, decade) in decadesRow track by $index" ng-click="selectDecade(decade)">
-      {{decade == 0 ? '' : decade.toString() + '-' + (decade + 9).toString()}}</td>
-    </tr>
-  </table>
+  <div ng-show="decadesInView">
+    <button class="btn btn-info btn-sm" ng-click="selectCentury(century - 100)">-</button>
+    <button class="btn btn-info btn-sm" ng-click="selectCentury(century + 100)">+</button>
+    
+    <table class="table-responsive table-condensed">
+      <tr ng-repeat="decadesRow in decadesTable track by $index">
+        <td ng-repeat="(index, decade) in decadesRow track by $index">
+          <button class="btn btn-link" ng-click="selectDecade(decade)">
+            {{decade == 0 ? '' : decade.toString() + '-' + (decade + 9).toString()}}
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-  <table ng-show="yearsInView">
-    <tr ng-click="yearsToDecades()">
-      <td>Go back</td>
-    </tr>
-    <tr ng-repeat="yearsRow in yearsTable track by $index">
-      <td ng-repeat="(index, year) in yearsRow track by $index" ng-click="selectYear(year)">
-      {{year == 0 ? '' : year}}</td>
-    </tr>
-  </table>
+  <div ng-show="yearsInView">
+    <button class="btn btn-info btn-sm" ng-click="yearsToDecades()">
+      &laquo; Choose decade
+    </button>
 
-  <table ng-show="monthsInView">
-    <tr ng-click="monthsToYears()">
-      <td>Go back</td>
-    </tr>
-    <tr ng-repeat="monthsRow in monthsTable track by $index">
-      <td ng-repeat="(index, month) in monthsRow track by $index" ng-click="selectMonth(month, year)">
-      {{monthData[month].nickname}}</td>
-    </tr>
-  </table>
+    <table class="table-responsive table-condensed">
+      <tr ng-repeat="yearsRow in yearsTable track by $index">
+        <td ng-repeat="(index, year) in yearsRow track by $index">
+          <button class="btn btn-link" ng-click="selectYear(year)">
+            {{year == 0 ? '' : year}}
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-  <table ng-show="daysInView">
-    <tr ng-click="daysToMonths()">
-      <td>Go back</td>
-    </tr>
-    <tr>
-      <td>S</td>
-      <td>M</td>
-      <td>T</td>
-      <td>W</td>
-      <td>R</td>
-      <td>F</td>
-      <td>S</td>
-    </tr>
-    <tr ng-repeat="daysRow in daysTable track by $index">
-      <td ng-repeat="(index, day) in daysRow track by $index" ng-click="selectDay(day)">
-      {{day}}</td>
-    </tr>
-  </table>
+  <div ng-show="monthsInView">
+
+    <button class="btn btn-info btn-sm" ng-click="monthsToYears()">
+      &laquo; Choose year
+    </button>
+
+    <h4>{{year}}</h4>
+
+    <table class="table-responsive table-condensed">
+      <tr ng-repeat="monthsRow in monthsTable track by $index">
+        <td ng-repeat="(index, month) in monthsRow track by $index">
+          <button class="btn btn-link" ng-click="selectMonth(month, year)">
+            {{monthData[month].nickname}}
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div ng-show="daysInView">
+    <button class="btn btn-info btn-sm" ng-click="daysToMonths()">
+      &laquo; Choose month
+    </button>
+
+    <h4>{{monthData[month].name}} {{year}}</h4>
+
+    <table class="table-responsive table-condensed">
+      <tr>
+        <th>S</th>
+        <th>M</th>
+        <th>T</th>
+        <th>W</th>
+        <th>R</th>
+        <th>F</th>
+        <th>S</th>
+      </tr>
+      <tr ng-repeat="daysRow in daysTable track by $index">
+        <td ng-repeat="(index, day) in daysRow track by $index">
+          <button class="btn btn-link btn-xs" ng-click="selectDay(day)">
+            {{day}}
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
 
   <div ng-show="finished">
-    <p>Date chosen: {{monthData[month].name}} {{day}}, {{year}}</p>
-    <p ng-click="delete()">[Delete]</p>
+    <h3>{{monthData[month].name}} {{day}}, {{year}}</h3>
+    <button class="btn btn-danger" ng-click="delete()">Delete</button>
   </div>
 </div>

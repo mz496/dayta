@@ -1,14 +1,25 @@
 <div>
   <calculator-two-cal-selector-element></calculator-two-cal-selector-element>
-  <p>Calculator: {{selectedCalculatorTwoCal}}</p>
 
   <div ng-show="selectedCalculatorTwoCal === 'allDays'">
-    <p>Days between: {{daysBetween}} (not including end date)</p>
-    <p>That's {{daysBetweenLongForm[0]}} years, {{daysBetweenLongForm[1]}} months, {{daysBetweenLongForm[2]}} days.
-    <p>The total is {{hoursBetween}} hours, or {{minsBetween}} minutes, or {{secsBetween}} seconds.</p>
+    <h4>Results for two dates</h4>
+    <h4>{{date0String}} and {{date1String}}</h4>
+
+    <p>There are <b>{{daysBetween}}</b> {{daysBetween === 1 ? "day" : "days"}} between those two dates (not including the end date).</p>
+    <p>That's {{daysBetweenLongForm[0]}} {{daysBetweenLongForm[0] === 1 ? "year" : "years"}}, {{daysBetweenLongForm[1]}} {{daysBetweenLongForm[1] === 1 ? "month" : "months"}}, and {{daysBetweenLongForm[2]}} {{daysBetweenLongForm[2] === 1 ? "day" : "days"}}.
+    <p>That total, measured from midnight on those dates, is also
+      <ul>
+        <li>{{hoursBetween | number}} hours, or</li>
+        <li>{{minsBetween | number}} minutes, or</li>
+        <li>{{secsBetween | number}} seconds.</li>
+      </ul>
+    </p>
   </div>
 
   <div ng-show="selectedCalculatorTwoCal === 'weekendsWeekdays'">
-    <p>Weekends between: {{weekendsBetween}}, Weekdays between: {{daysBetween - weekendsBetween}}</p>
+    <h4>Results for two dates</h4>
+    <h4>{{date0String}} and {{date1String}}</h4>
+
+    <p>Between those two dates (not including the end date), there are <b>{{weekendsBetween}}</b> {{weekendsBetween === 1 ? "weekend" : "weekends"}} and <b>{{daysBetween - weekendsBetween}}</b> {{daysBetween - weekendsBetween === 1 ? "weekday" : "weekdays"}}.</p>
   </div>
 </div>

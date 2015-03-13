@@ -25,6 +25,10 @@
     $scope.diffMin = null;
     $scope.diffSec = null;
 
+    function isLeap(yr) {
+      return ((yr % 4 === 0 && yr % 100 !== 0) || yr % 400 === 0);
+    }
+
     function dateToSecs(date) { return date/1000; }
     function dateToMins(date) { return dateToSecs(date) / 60; }
     function dateToHours(date) { return dateToMins(date) / 60; }
@@ -107,14 +111,14 @@
         // date0 is earlier than date1
         years = date1.getFullYear() - date0.getFullYear();
         months = date1.getMonth() - date0.getMonth();
-        if (months < 0) {
+        if (months <= 0) {
           // date1 is earlier in the year than date0; not a full year
           years--;
           months = 12 + months;
         }
 
         days = date1.getDate() - date0.getDate();
-        if (days < 0) {
+        if (days <= 0) {
           // date1 is earlier in the month than date0; not a full month
           months--;
           // count days from a version of date0 that's less than 1 month behind date1
@@ -147,7 +151,7 @@
     }
 
     $scope.$watch('selectedCalculator', function(newVal, oldVal) {
-      console.log(newVal); console.log(oldVal);
+      //console.log(newVal); console.log(oldVal);
 
       $scope.dayNumber = getDayNumber(
         CalData[i].year,
@@ -160,6 +164,8 @@
         CalData[i].month-1,
         CalData[i].day
       );
+
+      $scope.dayCount = isLeap(CalData[i].year) ? 366 : 365;
 
       if (newVal === 'countdown' || newVal === 'countup') {
         if ($scope.promise === null) {

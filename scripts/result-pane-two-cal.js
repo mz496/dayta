@@ -24,6 +24,70 @@
     $scope.hoursBetween = null;
     $scope.minsBetween = null;
     $scope.secsBetween = null;
+    $scope.date0String = null;
+    $scope.date1String = null;
+    $scope.monthData = {
+      1: {
+        nickname: 'Jan',
+        name: 'January',
+        days: 31,
+      },
+      2: {
+        nickname: 'Feb',
+        name: 'February',
+        days: 28,
+      },
+      3: {
+        nickname: 'Mar',
+        name: 'March',
+        days: 31,
+      },
+      4: {
+        nickname: 'Apr',
+        name: 'April',
+        days: 30,
+      },
+      5: {
+        nickname: 'May',
+        name: 'May',
+        days: 31,
+      },
+      6: {
+        nickname: 'Jun',
+        name: 'June',
+        days: 30,
+      },
+      7: {
+        nickname: 'Jul',
+        name: 'July',
+        days: 31,
+      },
+      8: {
+        nickname: 'Aug',
+        name: 'August',
+        days: 31,
+      },
+      9: {
+        nickname: 'Sep',
+        name: 'September',
+        days: 30,
+      },
+      10: {
+        nickname: 'Oct',
+        name: 'October',
+        days: 31,
+      },
+      11: {
+        nickname: 'Nov',
+        name: 'November',
+        days: 30,
+      },
+      12: {
+        nickname: 'Dec',
+        name: 'December',
+        days: 31,
+      }
+    };
 
     function countDaysBetween(year0, month0, day0, year1, month1, day1) {
       var date0 = new Date(Date.UTC(year0, month0, day0));
@@ -148,6 +212,13 @@
         CalData[1].month-1,
         CalData[1].day
       );
+
+      $scope.date0String = $scope.monthData[CalData[0].month].name +
+      ' ' + CalData[0].day +
+      ', ' + CalData[0].year;
+      $scope.date1String = $scope.monthData[CalData[1].month].name +
+      ' ' + CalData[1].day +
+      ', ' + CalData[1].year;
 
       /*if ($scope.selectedCalculatorTwoCal === null) {
         // clear everything

@@ -18,49 +18,65 @@
     <!--link rel="stylesheet" href="frameworks/bootstrap.min.css" /-->
   </head>
 
-  <style>
-    td {
-      width: 20px;
-      height: 20px;
-      border: 1px solid black;
-      text-align: center;
-    }
-    div {
-      border: 1px solid blue;
-      margin: 10px;
-    }
-
-  </style>
-
   <body ng-app="daytaApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-controller="CalendarSetController">
-      <p>(Database values)
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Dayta - data for days!</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><button class="btn btn-link" data-toggle="popover" data-placement="bottom" data-content="Dayta is a simple experiment to give useful information about dates and pairs of dates. Still a work in progress. Built with AngularJS, Bootstrap, and jQuery.">About</button></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://github.com/mz496">GitHub</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div id="main-container" class="container-fluid" ng-controller="CalendarSetController">
+      <!--p>(Database values)
       <p>First date: {{calData[0].month}}/{{calData[0].day}}/{{calData[0].year}}</p>
       <p>Second date: {{calData[1].month}}/{{calData[1].day}}/{{calData[1].year}}</p>
       <p>Selected calculators: {{selectedCalculators[0]}}, {{selectedCalculators[1]}}</p>
       <p>Selected 2-calendar calculator: {{selectedCalculatorTwoCal}}</p>
       <p>Active: {{active[0]}} {{active[1]}}</p>
-      <br/>
+      <br/-->
 
-      <calculator-two-cal-selector-element ng-show="selectedCalculatorTwoCal === null"></calculator-two-cal-selector-element>
+      <div class="row interface-view vertical-align" ng-repeat="i in calData track by $index">
+        <div class="col-md-6 interface-box">
+          <date-selector-element></date-selector-element>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+          <result-pane></result-pane>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
 
-      <result-pane-two-cal ng-show="selectedCalculatorTwoCal !== null"></result-pane-two-cal>
+      <div class="interface-view vertical-align">
+        <!--calculator-two-cal-selector-element ng-show="selectedCalculatorTwoCal === null"></calculator-two-cal-selector-element>
+        <result-pane-two-cal ng-show="selectedCalculatorTwoCal !== null"></result-pane-two-cal-->
+        <result-pane-two-cal></result-pane-two-cal>
+      </div>
 
-      <table>
-        <tr ng-repeat="i in calData track by $index">
-          <td>
-            <date-selector-element></date-selector-element>
-            <calculator-selector-element></calculator-selector-element>
-          </td>
-          <td>
-            <result-pane></result-pane>
-          </td>
-        </tr>
-      </table>
+      <button id="up-button" class="btn btn-default btn-lg">↑</button>
+      <button id="dn-button" class="btn btn-default btn-lg">↓</button>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -95,11 +111,13 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/interface.js"></script>
+        <script src="scripts/about.js"></script>
         <script src="scripts/date-selector.js"></script>
         <script src="scripts/calculator-selector.js"></script>
         <script src="scripts/calculator-two-cal-selector.js"></script>
         <script src="scripts/result-pane.js"></script>
         <script src="scripts/result-pane-two-cal.js"></script>
         <!-- endbuild -->
-</body>
+  </body>
 </html>

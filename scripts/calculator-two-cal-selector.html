@@ -1,3 +1,7 @@
-  <select ng-model="selectedCalculatorTwoCal" ng-show="showDropdown" ng-options="calc.nickname as calc.value for calc in calculatorsTwoCal">
-    <option value="">-- Choose a calculator --</option>
+  <select class="form-control" ng-show="!showDropdown" disabled>
+    <option value="">Select two dates to use two-date calculators...</option>
+  </select>
+
+  <select class="form-control" ng-model="selectedCalculatorTwoCal" ng-show="showDropdown" ng-options="calc.nickname as calc.value for calc in calculatorsTwoCal">
+    <option value="">-- Choose a two-calendar calculator --</option>
   </select>
